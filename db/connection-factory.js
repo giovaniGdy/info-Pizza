@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-const database = "unifeob";
+const database = "infoPizza";
 
 module.exports = () => {
 

@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Listagem de Contatos</title>
+        <title>Listagem de Pedidos</title>
         <% include ../head %>
     </head>
     <body class="container">
-        <h2 class="basic-title text-center">Listagem de Contatos</h2>
+        <h2 class="basic-title text-center">Listagem de Pedidos</h2>
         <div>
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th></th>
+                    <th>Cliente</th>
+                    <th>Endereço</th>
+                    <th>Pedido Realizado em:</th>
                 </tr>
                 </thead>
                 <tbody>
                     <% 
-                    contatos.forEach((contato) => {
+                    pedidos.forEach((pedido) => {
                         %>
                         <tr>
-                            <td><a href="/contatos/editar/<%=contato.id%>"><%= contato.nome %></a></td>
-                            <td><%= contato.email %></td>
+                            <td><a href="/pedido/editar/<%=pedido.id%>"><%= pedido.cliente %></a></td>
+                            <td><%= pedido.endereco %></td>
+                            <td><%= pedido.createdAt %></td>
                             <td>
-                                <form action="/contatos/<%=contato.id%>?_method=DELETE" method="post">
+                                <form action="/pedidos/<%=pedido.id%>?_method=DELETE" method="post">
                                     <button type="submit" class="btn btn-danger">Excluir</button>
                                 </form>
                             </td>
@@ -34,7 +35,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="/contatos/novo">[Cadastrar Contato]</a>
+        <a href="/pedidos/novo">[Cadastrar Contato]</a>
         <br><br><br><br><br>
         <a href="/produtos">[Ir para Produtos]</a>
     </body>

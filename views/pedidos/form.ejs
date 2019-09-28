@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fazer Pedido</title>
+        <% include ../head %>
+    </head>
+    <body>
+        <% if(locals.status){ %>
+            <p class="alert alert-info"><%=status%></p>
+        <%}%>
+        <div>
+            <div class ="container min-container">
+                <% if(!pedido.id) { %>
+                  <h2 class="basic-title">Fazer Pedido</h2>
+                <%} else { %>
+                  <h2 class="basic-title">Alterar pedido</h2>
+                <% } %>
+                <div class="errors">
+                   <%if(locals.erros){%>
+                    <ul style="list-style-type: none; padding: 0px;">
+                        <% erros.forEach((erro) => {%>
+                        <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+                   <%})}%>
+                   </ul>
+                </div>
+                <% if(!pedido.id) { %>
+                <form action="/pedidos" method="post" class="well" role="form">
+                <%} else { %>
+                <form action="/pedidos/<%=pedido.id%>?_method=PUT" method="post" class="well" role="form">
+                <% } %>
+                    <div class="form-group">
+                        <label for="titulo">Nome</label>
+                        <div class="input-group">
+                            <input type="text" name="cliente" placeholder="Seu nome" value="<%=pedido.cliente%>" size="80"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <div class="input-group">
+                            <input type="text" name="telefone" placeholder="Seu telefone" value="<%=pedido.telefone%>" size="80"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endereco">Endereço</label>
+                        <div class="input-group">
+                            <input type="text" name="endereco" placeholder="Seu endereco" value="<%=pedido.endereco%>" size="80"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pedido">O que deseja?</label>
+                        <div class="input-group">
+                            <input type="text" name="pedido" placeholder="Seu pedido" value="<%=pedido.pedido%>" size="80"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>    

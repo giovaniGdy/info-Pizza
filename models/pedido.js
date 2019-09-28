@@ -1,17 +1,19 @@
 const Sequelize = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-    const Contato = sequelize.define('Contato', {
+    const Pedido = sequelize.define('Pedido', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        nome: DataTypes.STRING,
-        email: DataTypes.STRING
+        cliente: DataTypes.STRING,
+        telefone: DataTypes.INTEGER,
+        endereco: DataTypes.STRING,
+        pedido: DataTypes.STRING,
     },
         {
-            tableName: 'contatos',
+            tableName: 'pedido',
             sequelize
         })
-    return Contato
+    return Pedido
 }
