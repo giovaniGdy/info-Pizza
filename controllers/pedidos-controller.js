@@ -43,12 +43,12 @@ class PedidosController {
     }
   }
 
-  async editar(req, res) {
+  async info(req, res) {
     const id = req.params.id
 
     try {
       const pedido = await Pedido.findByPk(id)
-      res.render('pedidos/list', {pedido})
+      res.render('pedidos/informacao', {pedido})
     } catch(err) {
       res.status(500).end(`Error: ${err}`)
     }

@@ -5,7 +5,7 @@
         <% include ../head %>
     </head>
     <body class="container">
-        <h2 class="basic-title text-center">Listagem de Pedidos</h2>
+        <h2 class="basic-title text-center">Pedidos Feitos</h2>
         <div>
             <table class="table table-bordered">
                 <thead>
@@ -20,7 +20,7 @@
                     pedidos.forEach((pedido) => {
                         %>
                         <tr>
-                            <td><a href="/pedido/editar/<%=pedido.id%>"><%= pedido.cliente %></a></td>
+                            <td><a href="/pedidos/info/<%=pedido.id%>"><%= pedido.cliente %></a></td>
                             <td><%= pedido.endereco %></td>
                             <td><%= pedido.createdAt %></td>
                             <td>
@@ -35,7 +35,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="/pedidos/novo">[Cadastrar Contato]</a>
+        <a id="botaoNovo" href="/pedidos/novo">Cadastrar Pedido</a>
         <br><br><br><br><br>
         <a href="/produtos">[Ir para Produtos]</a>
     </body>

@@ -1,0 +1,18 @@
+#botaoNovo {
+    text-decoration: none;
+    color: black;
+    background-color: lightgreen;
+    padding: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+#botaoNovo:hover {
+    transition-duration: 1s;
+    color: darkgreen;
+    border-color: darkgreen;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
