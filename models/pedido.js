@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         cliente: DataTypes.STRING,
         telefone: DataTypes.INTEGER,
         endereco: DataTypes.STRING,
+        cpf: DataTypes.INTEGER,
         pedido: DataTypes.STRING,
+        status: DataTypes.STRING
     },
         {
             tableName: 'pedido',

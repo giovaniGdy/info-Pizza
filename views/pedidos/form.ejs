@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label for="telefone">Telefone</label>
                         <div class="input-group">
-                            <input type="text" name="telefone" placeholder="Seu telefone" value="<%=pedido.telefone%>" size="80"/>
+                            <input type="text" name="telefone" placeholder="Seu telefone" value="<%=pedido.telefone%>" maxlength="9" size="80"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -47,9 +47,20 @@
                         </div>
                     </div>
                     <div class="form-group">
+                            <label for="cpf">CPF</label>
+                            <div class="input-group">
+                            <input type="text" name="cpf" placeholder="Seu CPF" value="<%=pedido.cpf%>" minlength="11" maxlength="11" size="80"/>
+                            </div>
+                        </div>
+                    <div class="form-group">
                         <label for="pedido">O que deseja?</label>
                         <div class="input-group">
                             <input type="text" name="pedido" placeholder="Seu pedido" value="<%=pedido.pedido%>" size="80"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="hidden" name="status" value="Pedido Feito"/>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>

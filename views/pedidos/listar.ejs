@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Listagem de Pedidos</title>
-        <% include ../head %>
-    </head>
-    <body class="container">
-        <h2 class="basic-title text-center">Pedidos Feitos</h2>
-        <div>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Cliente</th>
-                    <th>Endereço</th>
-                    <th>Pedido Realizado em:</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% 
-                    pedidos.forEach((pedido) => {
-                        %>
-                        <tr>
-                            <td><a href="/pedidos/info/<%=pedido.id%>"><%= pedido.cliente %></a></td>
-                            <td><%= pedido.endereco %></td>
-                            <td><%= pedido.createdAt %></td>
-                            <td>
-                                <form action="/pedidos/<%=pedido.id%>?_method=DELETE" method="post">
-                                    <button type="submit" class="btn btn-danger">Excluir</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <%
-                        })
-                       %>
-                </tbody>
-            </table>
-        </div>
-        <a id="botaoNovo" href="/pedidos/novo">Cadastrar Pedido</a>
-        <br><br><br><br><br>
-        <a href="/produtos">[Ir para Produtos]</a>
-    </body>
+  <head>
+    <title>Listagem de Pedidos</title>
+    <% include ../head %>
+  </head>
+  <body class="container">
+    <h2 class="basic-title text-center">Pedidos Feitos</h2>
+    <div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Endereço</th>
+            <th>Pedido Realizado em:</th>
+            <th>Status:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% pedidos.forEach((pedido) => { %>
+          <tr>
+            <td>
+              <a href="/pedidos/info/<%=pedido.id%>"><%= pedido.cliente %></a>
+            </td>
+            <td><%= pedido.endereco %></td>
+            <td><%= pedido.createdAt %></td>
+            <td><%= pedido.status %></td>
+            <td>
+              <form action="/pedidos/<%=pedido.id%>?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">Excluir</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <a id="botaoNovo" href="/pedidos/novo">Cadastrar Pedido</a>
+  </body>
 </html>

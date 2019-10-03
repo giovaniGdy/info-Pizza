@@ -19,9 +19,3 @@ require('./routes/pedidos')(app)
 app.get("/", (req, res) => res.redirect("/pedidos"))
 
 module.exports = app
-
-require('./routes/produtos')(app)
-
-app.get("/", (req, res) => res.redirect("/produtos"))
-
-module.exports = app

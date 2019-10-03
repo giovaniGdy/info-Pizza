@@ -27,7 +27,9 @@ class PedidosController {
     req.assert("cliente", "Nome é obrigatório").notEmpty()
     req.assert("telefone", "Telefone é obrigatório").notEmpty()
     req.assert("endereco", "Endereco é obrigatório").notEmpty()
+    req.assert("cpf", "CPF é obrigatório").notEmpty()
     req.assert("pedido", "Pedido é obrigatório").notEmpty()
+    req.assert("status")
 
     const erros = req.validationErrors()
 
@@ -76,7 +78,6 @@ class PedidosController {
       res.status(500).end(`Error: ${err}`)
     }
   }
-
 }
 
 module.exports = PedidosController

@@ -29,20 +29,41 @@
                 <form action="/pedidos/<%=pedido.id%>?_method=PUT" method="post" class="well" role="form">
                 <% } %>
                     <div class="form-group">
-                        <label for="titulo">Nome:</label> <br>
-                        <label for="cliente"> <%=pedido.cliente%> </label>                        
+                        <label for="titulo" id="infoTitulos">Nome:</label> <br>
+                        <label for="cliente" id="infoCliente"> <%=pedido.cliente%> </label>                        
                     </div>
                     <div class="form-group">
-                        <label for="telefone">Telefone</label> <br>
-                        <label for="cliente"> <%=pedido.telefone%> </label>    
+                        <label for="telefone" id="infoTitulos">Telefone:</label> <br>
+                        <label for="cliente" id="infoCliente"> <%=pedido.telefone%> </label>    
                     </div>
                     <div class="form-group">
-                        <label for="endereco">Endereço</label> <br>
-                        <label for="cliente"> <%=pedido.endereco%> </label>    
+                        <label for="endereco" id="infoTitulos">Endereço:</label> <br>
+                        <label for="cliente" id="infoCliente"> <%=pedido.endereco%> </label>    
                     </div>
                     <div class="form-group">
-                        <label for="pedido">O que deseja?</label> <br>
-                        <label for="cliente"> <%=pedido.pedido%> </label>    
+                            <label for="endereco" id="infoTitulos">CPF:</label> <br>
+                            <label for="cliente" id="infoCliente"> <%=pedido.cpf%> </label>    
+                        </div>
+                    <div class="form-group">
+                        <label for="pedido" id="infoTitulos">Pedido:</label> <br>
+                        <label for="cliente" id="infoCliente"> <%=pedido.pedido%> </label>    
+                    </div>
+                    <div class="form-group">
+                        <label for="status" id="infoTitulos">Status Atual:</label> <br>
+                        <label for="status" id="infoStatus"> <%=pedido.status%> </label>    
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label for="pedido" id="infoTitulos">Alterar Status Para:</label> <br>
+                            <select name="status" id="infoAlterarStatus">
+                                <option selected="selected">  </option>
+                                <option value="Aguardando Preparo">Aguardando Preparo</option>
+                                <option value="Preparo Iniciado">Preparo Iniciado</option>
+                                <option value="Saiu P/ Entrega">Saiu P/ Entrega</option>
+                                <option value="Entregue">Entrege</option>
+                                <option value="Cancelado" style="color: red">Cancelado</option>
+                            </select>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
