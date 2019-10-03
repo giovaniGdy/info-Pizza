@@ -15,14 +15,7 @@
                 <%} else { %>
                   <h2 class="basic-title">Alterar pedido</h2>
                 <% } %>
-                <div class="errors">
-                   <%if(locals.erros){%>
-                    <ul style="list-style-type: none; padding: 0px;">
-                        <% erros.forEach((erro) => {%>
-                        <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
-                   <%})}%>
-                   </ul>
-                </div>
+                
                 <% if(!pedido.id) { %>
                 <form action="/pedidos" method="post" class="well" role="form">
                 <%} else { %>
@@ -37,7 +30,7 @@
                     <div class="form-group">
                         <label for="telefone">Telefone</label>
                         <div class="input-group">
-                            <input type="text" name="telefone" placeholder="Seu telefone" value="<%=pedido.telefone%>" maxlength="9" size="80"/>
+                            <input type="text" name="telefone" placeholder="Seu telefone" value="<%=pedido.telefone%>" minlength="9" maxlength="9" size="80"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -45,13 +38,14 @@
                         <div class="input-group">
                             <input type="text" name="endereco" placeholder="Seu endereco" value="<%=pedido.endereco%>" size="80"/>
                         </div>
+                        <label for="endereco">Exemplo: Vila Brasil, Rua Antonio Mendes 1900</label>
                     </div>
                     <div class="form-group">
-                            <label for="cpf">CPF</label>
-                            <div class="input-group">
+                        <label for="cpf">CPF</label>
+                        <div class="input-group">
                             <input type="text" name="cpf" placeholder="Seu CPF" value="<%=pedido.cpf%>" minlength="11" maxlength="11" size="80"/>
-                            </div>
                         </div>
+                    </div>
                     <div class="form-group">
                         <label for="pedido">O que deseja?</label>
                         <div class="input-group">
@@ -65,6 +59,15 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
+                <div class="errors">
+                    <%if(locals.erros){%>
+                    <ul style="list-style-type: none; padding: 0px;">
+                        <% erros.forEach((erro) => {%>
+                        <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+                        <%})}%>
+                    </ul>
+                </div>
+                
             </div>
         </div>
     </body>

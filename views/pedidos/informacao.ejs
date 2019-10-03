@@ -1,73 +1,88 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Fazer Pedido</title>
-        <% include ../head %>
-    </head>
-    <body>
-        <% if(locals.status){ %>
-            <p class="alert alert-info"><%=status%></p>
-        <%}%>
-        <div>
+
+<head>
+    <title>Informações</title>
+    <% include ../head %>
+</head>
+
+<body>
+    <% if(locals.status){ %>
+    <p class="alert alert-info"><%=status%></p>
+    <%}%>
+        <div >
             <div class ="container min-container">
                 <% if(!pedido.id) { %>
-                  <h2 class="basic-title">Fazer Pedido</h2>
-                <%} else { %>
-                  <h2 class="basic-title">Alterar pedido</h2>
+    <h2 class="basic-title">Informações</h2>
+    <%} else { %>
+    <h2 class="basic-title">Informações</h2>
+    <% } %>
+    <div class="errors">
+        <%if(locals.erros){%>
+        <ul style="list-style-type: none; padding: 0px;">
+            <% erros.forEach((erro) => {%>
+            <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+            <%})}%>
+        </ul>
+    </div>
+    <% if(!pedido.id) { %>
+    <form action="/pedidos" method="post" class="well" role="form">
+        <%} else { %>
+        <div class="well">
+            <form action="/pedidos/<%=pedido.id%>?_method=PUT" method="post" role="form">
                 <% } %>
-                <div class="errors">
-                   <%if(locals.erros){%>
-                    <ul style="list-style-type: none; padding: 0px;">
-                        <% erros.forEach((erro) => {%>
-                        <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
-                   <%})}%>
-                   </ul>
+                <div class="form-group" id="infoBlocos">
+                    <label for="titulo" id="infoTitulos">N° Pedido:</label>
+                    <label for="cliente" id="infoTitulos" style="color: darkred"> <%=pedido.id%> </label>
                 </div>
-                <% if(!pedido.id) { %>
-                <form action="/pedidos" method="post" class="well" role="form">
-                <%} else { %>
-                <form action="/pedidos/<%=pedido.id%>?_method=PUT" method="post" class="well" role="form">
-                <% } %>
-                    <div class="form-group">
-                        <label for="titulo" id="infoTitulos">Nome:</label> <br>
-                        <label for="cliente" id="infoCliente"> <%=pedido.cliente%> </label>                        
+                <div id="infoBlocoDados">
+                    <label for="titulo" id="infoTitulos">Nome:</label> <br>
+                    <label for="cliente" id="infoCliente"> <%=pedido.cliente%> </label>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="telefone" id="infoTitulos">Telefone:</label> <br>
+                    <label for="cliente" id="infoCliente"> <%=pedido.telefone%> </label>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="endereco" id="infoTitulos">Endereço:</label> <br>
+                    <label for="cliente" id="infoCliente"> <%=pedido.endereco%> </label>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="endereco" id="infoTitulos">CPF:</label> <br>
+                    <label for="cliente" id="infoCliente"> <%=pedido.cpf%> </label>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="pedido" id="infoTitulos">Pedido:</label> <br>
+                    <label for="cliente" id="infoCliente"> <%=pedido.pedido%> </label>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="status" id="infoTitulos">Status Atual:</label> <br>
+                    <label for="status" id="infoStatus"> <%=pedido.status%> </label>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="pedido" id="infoTitulos">Alterar Status Para:</label> <br>
+                        <select name="status" id="infoAlterarStatus">
+                            <option value="<%=pedido.status%>" disabled selected="selected"> Selecione </option>
+                            <option value="Aguardando Preparo">Aguardando Preparo</option>
+                            <option value="Preparo Iniciado">Preparo Iniciado</option>
+                            <option value="Saiu P/ Entrega" style="border-bottom: 2px solid black;">Saiu P/ Entrega
+                            </option>
+                            <option disabled> ──────────────────── </option>
+                            <option value="Entregue" style="color: green">Entrege</option>
+                            <option value="Cancelado" style="color: red">Cancelado</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="telefone" id="infoTitulos">Telefone:</label> <br>
-                        <label for="cliente" id="infoCliente"> <%=pedido.telefone%> </label>    
-                    </div>
-                    <div class="form-group">
-                        <label for="endereco" id="infoTitulos">Endereço:</label> <br>
-                        <label for="cliente" id="infoCliente"> <%=pedido.endereco%> </label>    
-                    </div>
-                    <div class="form-group">
-                            <label for="endereco" id="infoTitulos">CPF:</label> <br>
-                            <label for="cliente" id="infoCliente"> <%=pedido.cpf%> </label>    
-                        </div>
-                    <div class="form-group">
-                        <label for="pedido" id="infoTitulos">Pedido:</label> <br>
-                        <label for="cliente" id="infoCliente"> <%=pedido.pedido%> </label>    
-                    </div>
-                    <div class="form-group">
-                        <label for="status" id="infoTitulos">Status Atual:</label> <br>
-                        <label for="status" id="infoStatus"> <%=pedido.status%> </label>    
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <label for="pedido" id="infoTitulos">Alterar Status Para:</label> <br>
-                            <select name="status" id="infoAlterarStatus">
-                                <option selected="selected">  </option>
-                                <option value="Aguardando Preparo">Aguardando Preparo</option>
-                                <option value="Preparo Iniciado">Preparo Iniciado</option>
-                                <option value="Saiu P/ Entrega">Saiu P/ Entrega</option>
-                                <option value="Entregue">Entrege</option>
-                                <option value="Cancelado" style="color: red">Cancelado</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+            <br>
+            <form action="/pedidos/<%=pedido.id%>?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
         </div>
-    </body>
-</html>    
+        </div>
+        </div>
+</body>
+
+</html>

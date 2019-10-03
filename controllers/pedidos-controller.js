@@ -41,7 +41,7 @@ class PedidosController {
       await Pedido.create(pedido)
       res.redirect("/pedidos")
     } catch(err) {
-      res.render("form", {status: err}, pedido)
+      await res.render("form", {status: err}, pedido)
     }
   }
 
