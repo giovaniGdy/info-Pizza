@@ -1,5 +1,6 @@
 const util = require('util')
 const {Pedido} = require('../models')
+const schedule = require('node-schedule')
 
 class PedidosController {
   constructor(app) {
@@ -7,7 +8,6 @@ class PedidosController {
   }
 
   async listar(req, res) {
-
     try {
       const pedidos = await Pedido.findAll()
       res.render('pedidos/listar', {pedidos: pedidos})
