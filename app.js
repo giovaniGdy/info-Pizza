@@ -4,7 +4,6 @@ const bodyParser = require("body-parser")
 const expressValidator = require("express-validator")
 const methodOverride = require("method-override")
 
-
 app.set("view engine", "ejs")
 
 app.use(express.static("public"))
@@ -13,9 +12,12 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(expressValidator())
 
+require('./routes/site')(app)
+
+app.get("/", (req, res) => res.redirect("/home"))
+
+require('./routes/login')(app)
 
 require('./routes/pedidos')(app)
-
-app.get("/", (req, res) => res.redirect("/pedidos"))
 
 module.exports = app

@@ -19,11 +19,11 @@
         <tbody>
           <% pedidos.forEach((pedido) => { %>
           <tr>
-            <td>
-              <a href="/pedidos/info/<%=pedido.id%>"><%= pedido.cliente %></a>
+            <td id="infoClienteAtras">
+              <a id="infoCliente" href="/pedidos/info/<%=pedido.id%>"><%= pedido.cliente %></a>
             </td>
             <td><%= pedido.endereco %></td>
-            <td><%= pedido.createdAt %></td>
+            <td><%= pedido.updatedAt %></td>
             <td><%= pedido.status %></td>
           </tr>
           <% }) %>

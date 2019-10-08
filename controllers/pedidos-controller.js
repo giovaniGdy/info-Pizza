@@ -1,6 +1,5 @@
 const util = require('util')
 const {Pedido} = require('../models')
-const schedule = require('node-schedule')
 
 class PedidosController {
   constructor(app) {
