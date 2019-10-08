@@ -20,15 +20,31 @@ USE infoPizza;
 CREATE TABLE `pedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cliente` varchar(50) DEFAULT NULL,
-  `telefone` int(11) DEFAULT NULL,
+  `telefone` int(9) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `cpf` bigint(11) DEFAULT NULL,
   `pedido` varchar(255) DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL,
-  `createdAt` timestamp DEFAULT NULL,
-  `updatedAt` timestamp DEFAULT NULL,
+  
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
   
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(50) DEFAULT NULL,
+  `senha` varchar(25) DEFAULT NULL,
+  `nome` varchar(75) DEFAULT NULL,
+  `endereco` varchar(100) DEFAULT NULL,
+  `telefone` int(9) DEFAULT NULL,
+  `cpf` bigint(11) DEFAULT NULL,
+  `type` varchar(25) DEFAULT NULL,
+  
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
