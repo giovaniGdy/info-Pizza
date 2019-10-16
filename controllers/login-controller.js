@@ -1,6 +1,9 @@
 const util = require("util");
 const { User } = require("../models");
 
+const senhaAdministrator = "admin";
+const userAdministrator = "admin";
+
 class LoginController {
   constructor(app) {
     this._app = app;
@@ -8,7 +11,8 @@ class LoginController {
 
   async loginScreen(req, res) {
     try {
-      res.render("users/login");
+      const user = {};
+      res.render("users/login", { user });
     } catch (err) {
       res.status(500).end(`Error: ${err}`);
     }
@@ -43,6 +47,33 @@ class LoginController {
       await res.render("form", { status: err }, user);
     }
   }
+
+  async logar(req, res) {
+    const userPass = req.body.senha;
+    const user = req.body.user;
+
+    req.assert("user", "Nome de usuário é obrigatório").notEmpty();
+    req.assert("senha", "Senha é obrigatório").notEmpty();
+
+    const erros = req.validationErrors();
+
+    if (erros) {
+      return res.render("users/login", { erros, user });
+    }
+
+    try {
+      await User.findOne({ where: { user } }).then(data => {
+          if (user === data.user && userPass == data.senha) {
+            res.redirect("/");
+          } else {
+            res.render("users/login", { erros, user })
+          }
+      });
+    } catch (err) {
+      res.status(500).end(`${err}`);
+    }
+  }
+
 
   async excluir(req, res) {
     const id = req.params.id;

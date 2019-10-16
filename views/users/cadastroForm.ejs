@@ -1,80 +1,86 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Cadastrar-se</title>
-        <% include ../head %>
-    </head>
-    <body>
-        <% if(locals.status){ %>
-            <p class="alert alert-info"><%=status%></p>
-        <%}%>
+
+<head>
+    <title>Cadastrar-se</title>
+    <% include ../head %>
+</head>
+
+<body>
+    <% if(locals.status){ %>
+    <p class="alert alert-info"><%=status%></p>
+    <%}%>
         <div>
             <div class ="container min-container">
                 <% if(!user.id) { %>
-                  <h2 class="basic-title">Cadastrar-se</h2>
-                <%} else { %>
-                  <h2 class="basic-title">Cadastrar-se</h2>
-                <% } %>
-                
-                <% if(!user.id) { %>
-                <form action="/login" method="post" class="well" role="form">
-                <%} else { %>
-                <form action="/login/<%=user.id%>?_method=PUT" method="post" class="well" role="form">
-                <% } %>
-                    <div class="form-group">
-                        <label for="user">Nome de Usuário</label>
-                        <div class="input-group">
-                            <input type="text" name="user" placeholder="Nome de Usuário" value="<%=user.username%>" size="80"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <div class="input-group">
-                            <input type="text" name="senha" placeholder="Sua senha" value="<%=user.senha%>" size="80"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="endereco">Nome</label>
-                        <div class="input-group">
-                            <input type="text" name="nome" placeholder="Seu Nome" value="<%=user.nome%>" size="80"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="endereco">Endereço</label>
-                        <div class="input-group">
-                            <input type="text" name="endereco" placeholder="Seu Endereço" value="<%=user.endereco%>" size="80"/>
-                        </div>
-                        <label for="endereco">Exemplo: Vila Brasil, Rua Antonio Mendes 1900</label>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone</label>
-                        <div class="input-group">
-                            <input type="text" name="telefone" placeholder="Seu telefone" value="<%=user.telefone%>" minlength="9" maxlength="9" size="80"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="cpf">CPF</label>
-                        <div class="input-group">
-                            <input type="text" name="cpf" placeholder="Seu CPF" value="<%=user.cpf%>" minlength="11" maxlength="11" size="80"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="hidden" name="type" value="Cliente"/>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-                <div class="errors">
-                    <%if(locals.erros){%>
-                    <ul style="list-style-type: none; padding: 0px;">
-                        <% erros.forEach((erro) => {%>
-                        <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
-                        <%})}%>
-                    </ul>
+    <h2 class="basic-title">Cadastrar-se</h2>
+    <%} else { %>
+    <h2 class="basic-title">Cadastrar-se</h2>
+    <% } %>
+
+    <% if(!user.id) { %>
+    <form action="/login" method="post" class="well" role="form">
+        <%} else { %>
+        <form action="/login/<%=user.id%>?_method=PUT" method="post" class="well" role="form">
+            <% } %>
+            <div class="form-group">
+                <label for="user">Nome de Usuário</label>
+                <div class="input-group">
+                    <input type="text" name="user" placeholder="Nome de Usuário" value="<%=user.username%>" size="80" />
                 </div>
-                
             </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <div class="input-group">
+                    <input type="text" name="senha" placeholder="Sua senha" value="<%=user.senha%>" size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="endereco">Nome</label>
+                <div class="input-group">
+                    <input type="text" name="nome" placeholder="Seu Nome" value="<%=user.nome%>" size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <div class="input-group">
+                    <input type="text" name="endereco" placeholder="Seu Endereço" value="<%=user.endereco%>"
+                        size="80" />
+                </div>
+                <label for="endereco">Exemplo: Vila Brasil, Rua Antonio Mendes 1900</label>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <div class="input-group">
+                    <input type="text" name="telefone" placeholder="Seu telefone" value="<%=user.telefone%>"
+                        minlength="9" maxlength="9" size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <div class="input-group">
+                    <input type="text" name="cpf" placeholder="Seu CPF" value="<%=user.cpf%>" minlength="11"
+                        maxlength="11" size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="hidden" name="type" value="Cliente" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+        <div class="errors">
+            <%if(locals.erros){%>
+            <ul style="list-style-type: none; padding: 0px;">
+                <% erros.forEach((erro) => {%>
+                <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+                <%})}%>
+            </ul>
         </div>
-    </body>
-</html>    
+
+        </div>
+        </div>
+</body>
+
+</html>

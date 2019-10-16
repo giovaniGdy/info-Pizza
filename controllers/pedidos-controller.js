@@ -1,5 +1,6 @@
 const util = require('util')
 const {Pedido} = require('../models')
+const {Cardapio} = require('../models')
 
 class PedidosController {
   constructor(app) {
@@ -17,7 +18,8 @@ class PedidosController {
 
   async novo(req, res) {
     const pedido = {}
-    res.render("pedidos/form", {pedido})
+    const cardapio = await Cardapio.findAll()
+    res.render("pedidos/form", {pedido, cardapio})
   }
 
   async adicionar(req, res) {

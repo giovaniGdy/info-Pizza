@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Informações</title>
+    <% include ../head %>
+</head>
+
+<body>
+    <% if(locals.status){ %>
+    <p class="alert alert-info"><%=status%></p>
+    <%}%>
+        <div >
+            <div class ="container min-container">
+                <% if(!item.id) { %>
+    <h2 class="basic-title">Informações</h2>
+    <%} else { %>
+    <h2 class="basic-title">Informações</h2>
+    <% } %>
+    <div class="errors">
+        <%if(locals.erros){%>
+        <ul style="list-style-type: none; padding: 0px;">
+            <% erros.forEach((erro) => {%>
+            <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+            <%})}%>
+        </ul>
+    </div>
+    <% if(!item.id) { %>
+    <form action="/cardapio" method="post" class="well" role="form">
+        <%} else { %>
+        <div class="well">
+            <form action="/cardapio/<%=item.id%>?_method=PUT" method="post" role="form">
+                <% } %>
+                <div class="form-group" id="infoBlocos">
+                    <label for="titulo" id="infoTitulos">Produto:</label>
+                    <input type="text" id="infoItem" name="nome" placeholder="<%=item.nome%>" value="<%=item.nome%>" size="80"/>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="titulo" id="infoTitulos">Preço:</label> <br>
+                    <input type="text" id="infoItem" name="preco" placeholder="<%=item.preco%>" value="<%=item.preco%>" min="0" size="80"/>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="telefone" id="infoTitulos">Descrição:</label> <br>
+                    <input type="text" id="infoItem" name="descricao" placeholder="<%=item.descricao%>" value="<%=item.descricao%>" size="80"/>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="endereco" id="infoTitulos">Imagem:</label> <br>
+                    <input type="text" id="infoItem" name="imgUrl" placeholder="<%=item.imgUrl%>" value="<%=item.imgUrl%>" size="80"/>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="status" id="infoTitulos">Alterar Status Para:</label> <br>
+                        <select name="status" id="infoAlterarStatus">
+                            <option value="Não Listado" disabled selected="selected" style="color: gray">Selecione</option>
+                            <option value="Listado" style="color: green">Listado</option>
+                            <option value="Não Listado" style="color: red">Não Listado</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+            <br>
+            <form action="/cardapio/<%=item.id%>?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
+        </div>
+        </div>
+        </div>
+</body>
+
+</html>

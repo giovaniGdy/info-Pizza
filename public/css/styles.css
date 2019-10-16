@@ -13,6 +13,7 @@
 #botaoNovo {
     text-decoration: none;
     color: black;
+    width: 100%;
     background-color: lightgreen;
     padding: 10px;
     border-width: 2px;
@@ -73,4 +74,66 @@
 
 #infoClienteAtras {
     background-color: rgb(136, 136, 136);
+}
+
+#infoItem {
+    font-size: 15px;
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #444;
+    line-height: 1.3;
+    padding: .6em 1.4em .5em .8em;
+    width: 100%;
+    max-width: 100%; 
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid #aaa;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    border-radius: .7em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#dinossauro {
+    color: blue;
+    font-size: 25px;
+    background-color: burlywood;
+    padding: 15px;
+}
+
+#divisao {
+    width: 100%;
+    text-align: center;
+}
+
+#itensCardapio {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#blocoItem {
+    flex: 1 1 auto;
+    width: 300px;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(112, 215, 255, 0.418);
+    border-radius: 15px;
+    margin: 3%;
+}
+
+#itemImg {
+    margin: 5px;
+    height: 200px;
+    width: 200px;
+    border-radius: 25px;
+}
+
+#itemPreco {
+    font-size: 20px;
+}
+
+#precoCardapio {
+    background-color: gray;
 }

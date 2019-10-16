@@ -5,47 +5,49 @@
     <title>Acesso ao Sistema</title>
     <% include ../head %>
 </head>
+
 <body>
     <% if(locals.status){ %>
-        <p class="alert alert-info"><%=status%></p>
+    <p class="alert alert-info"><%=status%></p>
     <%}%>
 
-    <div class="container">
+    <div class="container min-container">
         <div class="col-sm-6 col-sm-offset-3">
-            <h1><span class="fa fa-sign-in"></span> Acesso ao Sistema</h1>
-        </div>
-            <form action="" method="post" class="well" role="form">
-
-        <form action="" method="get">
-
-            <div class="form-group">
-                <label>Usuário</label>
-                <input type="text" name="user" class="form-control" name="email" />
-            </div>
-            <div class="form-group">
-                <label>Senha</label>
-                <input type="password" class="form-control" name="password" />
-            </div>
-
-            <button type="submit" class="btn btn-warning btn-lg">Login</button>
-            <br> <br>
-            <a href="/login/novo" class="btn btn-warning btn-lg">Cadastre-se</a>
-        </form>
-        
-
-        <div class="errors">
-            <%if(locals.erros){%>
-            <ul style="list-style-type: none; padding: 0px;">
-                <% erros.forEach((erro) => {%>
-                <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
-                <%})}%>
-            </ul>
-        </div>
-
+            <h2 class="basic-title">Cadastrar-se</h2>
 
     </div>
-    </div>
+    <% if(!user.id) { %>
+    <form action="/logar/<%=user%>?_method=PUT" method="post" class="well" role="form">
+        <%} else { %>
+        <div class="well">
+            <form action="/" method="post" role="form">
+                <% } %>
+                <br><br><br><br>
+                <div class="form-group">
+                    <label>Usuário</label>
+                    <input type="text" name="user" value="<%=user.username%>" class="form-control" name="email" />
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" name="senha" value="<%=user.senha%>" class="form-control" name="password" />
+                </div>
+
+                <button type="submit" class="btn btn-warning btn-lg">Login</button>
+                <br> <br>
+            </form>
+
+            <div class="errors">
+                <%if(locals.erros){%>
+                <ul style="list-style-type: none; padding: 0px;">
+                    <% erros.forEach((erro) => {%>
+                    <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+                    <%})}%>
+                </ul>
+            </div>
+
+
+        </div>
+        </div>
 </body>
-<footer></footer>
 
 </html>

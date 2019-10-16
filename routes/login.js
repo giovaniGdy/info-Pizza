@@ -11,6 +11,8 @@ module.exports = (app) => {
 	app.get("/login/novo", controller.novo.bind(controller))
 	
 	app.route("/login/:id")
-		.delete(controller.excluir.bind(controller))
-		.put(controller.alterar.bind(controller))
+	 	.delete(controller.excluir.bind(controller))
+	 	.put(controller.alterar.bind(controller))
+
+	app.put("/logar/:user", controller.logar.bind(controller))
 }

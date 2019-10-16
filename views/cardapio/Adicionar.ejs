@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Adicionar Item</title>
+    <% include ../head %>
+</head>
+
+<body>
+    <% if(locals.status){ %>
+    <p class="alert alert-info"><%=status%></p>
+    <%}%>
+        <div>
+            <div class ="container min-container">
+                <% if(!items.id) { %>
+    <h2 class="basic-title">Adicionar Item</h2>
+    <%} else { %>
+    <h2 class="basic-title">Alterar Item</h2>
+    <% } %>
+
+    <% if(!items.id) { %>
+    <form action="/cardapio" method="post" class="well" role="form">
+        <%} else { %>
+        <form action="/cardapio/<%=items.id%>?_method=PUT" method="post" class="well" role="form">
+            <% } %>
+            <div class="form-group">
+                <label for="nome">Produto:</label>
+                <div class="input-group">
+                    <input type="text" name="nome" placeholder="Nome" value="<%=items.nome%>" size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço</label>
+                <div class="input-group">
+                    <input type="text" name="preco" placeholder="Preço" value="<%=items.preco%>" size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <div class="input-group">
+                    <input type="text" name="descricao" placeholder="Descrição" value="<%=items.descricao%>"
+                        size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="imgUrl">Imagem</label>
+                <div class="input-group">
+                    <input type="text" name="imgUrl" placeholder="Imagem" value="<%=items.imgUrl%>"
+                        size="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                    <div class="input-group">
+                        <label for="status" id="infoTitulos">Alterar Status Para:</label> <br>
+                        <select name="status" required id="infoAlterarStatus">
+                            <option disabled selected="selected" style="color: gray">Selecione</option>
+                            <option value="Listado" style="color: green">Listado</option>
+                            <option value="Não Listado" style="color: red">Não Listado</option>
+                        </select>
+                    </div>
+                </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+
+        </form>
+        <div class="errors">
+            <%if(locals.erros){%>
+            <ul style="list-style-type: none; padding: 0px;">
+                <% erros.forEach((erro) => {%>
+                <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+                <%})}%>
+            </ul>
+        </div>
+
+        </div>
+
+        </div>
+</body>
+</html>

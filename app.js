@@ -6,18 +6,20 @@ const methodOverride = require("method-override")
 
 app.set("view engine", "ejs")
 
-app.use(express.static("public"))
+app.use( express.static( "public" ) )
 app.use(methodOverride("_method"))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(expressValidator())
 
-require('./routes/site')(app)
-
 app.get("/", (req, res) => res.redirect("/home"))
+
+require('./routes/site')(app)
 
 require('./routes/login')(app)
 
 require('./routes/pedidos')(app)
+
+require('./routes/cardapio')(app)
 
 module.exports = app
