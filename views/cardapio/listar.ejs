@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Listagem de Pedidos</title>
-    <% include ../head %>
-  </head>
-  <body class="container">
-    <h2 class="basic-title text-center">Itens no Cardapio</h2>
-    <div>
-      <table class="table table-bordered">
-        <div id="itensCardapio">
-          <% cardapio.forEach((item) => { %>
-          <div id="blocoItem">
-            <a id="infoItem" href="/cardapio/info/<%=item.id%>"><%= item.nome %></a>
-            <img src="<%= item.imgUrl %>" id="itemImg"> <br>
-            <p id="itemPreco">R$ <%= item.preco %></p> <br>
-            <p id="itemStatus"> <%= item.status %></p>
-          </div>
-          <% }) %>
+
+<head>
+  <title>Listagem de Pedidos</title>
+  <% include ../head %>
+  
+  <a href="/" id="backButton"> ↩ Voltar</a>
+</head>
+
+<body class="container">
+  <h2 class="basic-title text-center">Itens no Cardapio</h2>
+  <div>
+    <table class="table table-bordered">
+      <div id="itensCardapio">
+        <% cardapio.forEach((item) => { %>
+        <div id="blocoItem">
+          <a id="infoItem" href="/cardapio/info/<%=item.id%>"><%= item.nome %></a>
+          <img src="<%= item.imgUrl %>" id="itemImg"> <br>
+          <p id="itemPreco">R$ <%= item.preco %></p> <br>
+          <p id="itemStatus"> <%= item.status %></p>
         </div>
-      </table>
-    </div>
-    <a id="botaoNovo" href="/cardapio/novo">Adicionar Item ao Cardapio</a>
-  </body>
+        <% }) %>
+      </div>
+    </table>
+  </div>
+  <a id="botaoNovo" href="/cardapio/novo">Adicionar Item ao Cardapio</a>
+</body>
+
 </html>

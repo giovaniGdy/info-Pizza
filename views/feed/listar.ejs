@@ -14,27 +14,23 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Cliente</th>
-          <th>Endereço</th>
-          <th>Pedido Realizado em:</th>
-          <th>Status:</th>
+          <th>Título</th>
+          <th>Descrição</th>
         </tr>
       </thead>
       <tbody>
-        <% pedidos.forEach((pedido) => { %>
+        <% posts.forEach((posts) => { %>
         <tr>
           <td id="infoClienteAtras">
-            <a id="infoCliente" href="/pedidos/info/<%=pedido.id%>"><%= pedido.cliente %></a>
+            <a id="infoCliente" href="/feed/info/<%=posts.id%>"><%= posts.titulo %></a>
           </td>
-          <td><%= pedido.endereco %></td>
-          <td><%= pedido.updatedAt %></td>
-          <td><%= pedido.status %></td>
+          <td><%= posts.descricao %></td>
         </tr>
         <% }) %>
       </tbody>
     </table>
   </div>
-  <a id="botaoNovo" href="/pedidos/novo">Cadastrar Pedido</a>
+  <a id="botaoNovo" href="/feed/novo">Fazer Nova Postagem</a>
 </body>
 
 <script>

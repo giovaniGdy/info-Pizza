@@ -29,6 +29,7 @@ CREATE TABLE `pedido` (
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   
+  
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,3 +49,27 @@ CREATE TABLE `usuarios` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `cardapio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) DEFAULT NULL,
+  `preco` double DEFAULT NULL,
+  `descricao` varchar(300) DEFAULT NULL,
+  `imgUrl` varchar(150) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `feed` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(50) DEFAULT NULL,
+  `descricao` varchar(1500) DEFAULT NULL,
+  
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -10,6 +10,10 @@
     margin-bottom: 10px;
 }
 
+#backButton {
+    font-size: 25px;    
+}
+
 #botaoNovo {
     text-decoration: none;
     color: black;
@@ -118,7 +122,7 @@
     width: 300px;
     height: 100%;
     text-align: center;
-    background-color: rgba(112, 215, 255, 0.418);
+    background-color: rgba(255, 145, 81, 0.74);
     border-radius: 15px;
     margin: 3%;
 }

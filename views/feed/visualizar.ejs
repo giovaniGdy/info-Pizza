@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Informações</title>
+    <% include ../head %>
+
+    <a href="/feed" id="backButton"> ↩ Voltar</a>
+</head>
+
+<body>
+    <% if(locals.status){ %>
+    <p class="alert alert-info"><%=status%></p>
+    <%}%>
+        <div >
+            <div class ="container min-container">
+                <% if(!posts.id) { %>
+    <h2 class="basic-title">Erro</h2>
+    <%} else { %>
+    <h2 class="basic-title">Postagens</h2>
+    <% } %>
+    <div class="errors">
+        <%if(locals.erros){%>
+        <ul style="list-style-type: none; padding: 0px;">
+            <% erros.forEach((erro) => {%>
+            <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+            <%})}%>
+        </ul>
+    </div>
+    <% if(!posts.id) { %>
+    <form action="/posts" method="post" class="well" role="form">
+        <%} else { %>
+        <div class="well">
+            <form action="/feed/<%=posts.id%>?_method=PUT" method="post" role="form">
+                <% } %>
+                <div class="form-group" id="infoBlocos">
+                    <label for="data" id="infoTitulos">Data:</label>
+                    <label for="data"> <%=posts.updatedAt%> </label>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="titulo" id="infoTitulos">Título</label> <br>
+                    <input type="text" id="infoItem" name="titulo" placeholder="<%=posts.titulo%>" value="<%=posts.titulo%>" min="0" size="80"/>
+                </div>
+                <div id="infoBlocoDados">
+                    <label for="telefone" id="infoTitulos">Descrição:</label> <br>
+                    <input type="text" id="infoItem" name="descricao" placeholder="<%=posts.descricao%>" value="<%=posts.descricao%>" size="80"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+            <br>
+            <form action="/feed/<%=posts.id%>?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
+        </div>
+        </div>
+        </div>
+</body>
+
+</html>

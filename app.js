@@ -22,4 +22,6 @@ require('./routes/pedidos')(app)
 
 require('./routes/cardapio')(app)
 
+require('./routes/feed')(app)
+
 module.exports = app
