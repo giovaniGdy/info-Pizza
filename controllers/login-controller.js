@@ -49,31 +49,28 @@ class LoginController {
   }
 
   async logar(req, res) {
-    const userPass = req.body.senha;
-    const user = req.body.user;
+    const userPass = req.body.usuario.senha;
+    const userName = req.body.usuario.username;
 
-    req.assert("user", "Nome de usuário é obrigatório").notEmpty();
-    req.assert("senha", "Senha é obrigatório").notEmpty();
+    const loginConfirmation = ["ACCESS_GRANTED_USER_PERMITED", userName, userPass]
 
-    const erros = req.validationErrors();
-
-    if (erros) {
-      return res.render("users/login", { erros, user });
-    }
+    console.log(req.body.usuario);
 
     try {
-      await User.findOne({ where: { user } }).then(data => {
-          if (user === data.user && userPass == data.senha) {
-            res.redirect("/");
-          } else {
-            res.render("users/login", { erros, user })
-          }
+      await User.findOne({ where: { user: userName } }).then(data => {
+        if (data === null) {
+          res.json("Invalido");
+        }
+        if (userName === data.user && userPass === data.senha) {
+          res.json(loginConfirmation);
+        } else {
+          res.json("Invalido");
+        }
       });
     } catch (err) {
-      res.status(500).end(`${err}`);
+      return res.status(500).end(`Error: ${err}`);
     }
   }
-
 
   async excluir(req, res) {
     const id = req.params.id;

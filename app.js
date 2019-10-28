@@ -3,6 +3,13 @@ const app = express()
 const bodyParser = require("body-parser")
 const expressValidator = require("express-validator")
 const methodOverride = require("method-override")
+const axios = require('axios')
+
+// aaaa
+var cors = require('cors')
+
+app.use(cors({origin: '*'}));
+// aaaa
 
 app.set("view engine", "ejs")
 
@@ -11,8 +18,6 @@ app.use(methodOverride("_method"))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(expressValidator())
-
-app.get("/", (req, res) => res.redirect("/home"))
 
 require('./routes/site')(app)
 

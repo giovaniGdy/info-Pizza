@@ -14,5 +14,5 @@ module.exports = (app) => {
 	 	.delete(controller.excluir.bind(controller))
 	 	.put(controller.alterar.bind(controller))
 
-	app.put("/logar/:user", controller.logar.bind(controller))
+	app.put("/logar", controller.logar.bind(controller))
 }

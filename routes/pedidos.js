@@ -8,7 +8,7 @@ module.exports = (app) => {
 		.get(controller.listar.bind(controller))
 		.post(controller.adicionar.bind(controller))
 
-	app.get("/pedidos/novo", controller.novo.bind(controller))
+	app.get("/fazer-pedido", controller.adicionar.bind(controller))
 
 	app.get("/pedidos/info/:id", controller.info.bind(controller))
 

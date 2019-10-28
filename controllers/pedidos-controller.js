@@ -1,84 +1,70 @@
-const util = require('util')
-const {Pedido} = require('../models')
-const {Cardapio} = require('../models')
+const util = require("util");
+const axios = require("axios");
+
+const { Pedido } = require("../models");
+const { Cardapio } = require("../models");
 
 class PedidosController {
   constructor(app) {
-    this._app = app
+    this._app = app;
   }
 
   async listar(req, res) {
     try {
-      const pedidos = await Pedido.findAll()
-      res.render('pedidos/listar', {pedidos: pedidos})
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      const pedidos = await Pedido.findAll();
+      return res.json(pedidos);
+    } catch (err) {
+      res.status(500).end(`Error: ${err}`);
     }
   }
 
-  async novo(req, res) {
-    const pedido = {}
-    const cardapio = await Cardapio.findAll()
-    res.render("pedidos/form", {pedido, cardapio})
-  }
 
   async adicionar(req, res) {
-    const pedido = req.body
-    
-    req.assert("cliente", "Nome é obrigatório").notEmpty()
-    req.assert("telefone", "Telefone é obrigatório").notEmpty()
-    req.assert("endereco", "Endereco é obrigatório").notEmpty()
-    req.assert("cpf", "CPF é obrigatório").notEmpty()
-    req.assert("pedido", "Pedido é obrigatório").notEmpty()
-    req.assert("status")
-
-    const erros = req.validationErrors()
-
-    if (erros) {
-      return res.render("pedidos/form", {erros, pedido})
-    }
+    const pedido = req.body.pedido
 
     try {
-      await Pedido.create(pedido)
-      res.redirect("/pedidos")
+      const criar = await Pedido.create(pedido)
+      res.json("Pedido Realizado Com Sucesso!")
     } catch(err) {
-      await res.render("form", {status: err}, pedido)
+      res.json("Erro")
     }
+    
   }
 
   async info(req, res) {
-    const id = req.params.id
+    const id = req.params.id;
 
     try {
-      const pedido = await Pedido.findByPk(id)
-      res.render('pedidos/informacao', {pedido})
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      const pedido = await Pedido.findByPk(id);
+      res.json({ pedido });
+    } catch (err) {
+      res.json("Erro");
     }
   }
 
   async excluir(req, res) {
-    const id = req.params.id
+    const id = req.params.id;
 
     try {
-      await Pedido.destroy({where: { id }})
-      res.redirect('/pedidos')
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      await Pedido.destroy({ where: { id } }).then(
+        res.json("Pedido Deletado")
+      );      
+    } catch (err) {
+      res.json("Erro");
     }
   }
 
   async alterar(req, res) {
-    const id = req.params.id
-    const pedido = req.body
+    const id = req.params.id;
+    const pedido = req.body.pedido;
 
     try {
-      await Pedido.update(pedido, {where: { id }})
-      res.redirect('/pedidos')
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      const alterar = await Pedido.update(pedido, { where: { id } });
+      res.json(alterar)
+    } catch (err) {
+      res.json(`Error: ${err}`);
     }
   }
 }
 
-module.exports = PedidosController
+module.exports = PedidosController;
