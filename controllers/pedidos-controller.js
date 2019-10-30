@@ -2,7 +2,6 @@ const util = require("util");
 const axios = require("axios");
 
 const { Pedido } = require("../models");
-const { Cardapio } = require("../models");
 
 class PedidosController {
   constructor(app) {
@@ -18,17 +17,15 @@ class PedidosController {
     }
   }
 
-
   async adicionar(req, res) {
-    const pedido = req.body.pedido
+    const pedido = req.body.pedido;
 
     try {
-      const criar = await Pedido.create(pedido)
-      res.json("Pedido Realizado Com Sucesso!")
-    } catch(err) {
-      res.json("Erro")
+      const criar = await Pedido.create(pedido);
+      res.json("S");
+    } catch (err) {
+      res.json("Erro");
     }
-    
   }
 
   async info(req, res) {
@@ -46,9 +43,7 @@ class PedidosController {
     const id = req.params.id;
 
     try {
-      await Pedido.destroy({ where: { id } }).then(
-        res.json("Pedido Deletado")
-      );      
+      await Pedido.destroy({ where: { id } }).then(res.json("S"));
     } catch (err) {
       res.json("Erro");
     }
@@ -60,7 +55,7 @@ class PedidosController {
 
     try {
       const alterar = await Pedido.update(pedido, { where: { id } });
-      res.json(alterar)
+      res.json("S");
     } catch (err) {
       res.json(`Error: ${err}`);
     }

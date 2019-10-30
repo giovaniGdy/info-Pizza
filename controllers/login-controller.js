@@ -1,9 +1,6 @@
 const util = require("util");
 const { User } = require("../models");
 
-const senhaAdministrator = "admin";
-const userAdministrator = "admin";
-
 class LoginController {
   constructor(app) {
     this._app = app;

@@ -1,81 +1,66 @@
-const util = require('util')
-const {Cardapio} = require('../models')
+const util = require("util");
+
+const { Cardapio } = require("../models");
 
 class CardapioController {
   constructor(app) {
-    this._app = app
+    this._app = app;
   }
 
   async listar(req, res) {
     try {
-      const items = await Cardapio.findAll()
-      res.render('cardapio/listar', {cardapio: items})
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      const items = await Cardapio.findAll();
+      res.json(items);
+    } catch (err) {
+      res.json(`Error: ${err}`);
     }
-  }
-
-  async novo(req, res) {
-    const items = {}
-    res.render("cardapio/adicionar", {items})
   }
 
   async adicionar(req, res) {
-    const items = req.body
-    
-    req.assert("nome", "Nome é obrigatório").notEmpty()
-    req.assert("preco", "Preço é obrigatório").notEmpty()
-    req.assert("descricao", "Descrição é obrigatória").notEmpty()
-    req.assert("imgUrl")
-    req.assert("status")
-   
-    const erros = req.validationErrors()
-
-    if (erros) {
-      return res.render("cardapio/adicionar", {erros, items})
-    }
+    const items = req.body.item;
+    console.log(items);
 
     try {
-      await Cardapio.create(items)
-      res.redirect("/cardapio")
-    } catch(err) {
-      await res.render("form", {status: err}, items)
+      await Cardapio.create(items);
+      res.json("S");
+    } catch (err) {
+      res.json(`Erro ${err}`);
     }
   }
 
   async info(req, res) {
-    const id = req.params.id
+    const id = req.params.id;
 
     try {
-      const item = await Cardapio.findByPk(id)
-      res.render('cardapio/informacao', {item})
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      const item = await Cardapio.findByPk(id);
+      res.json({ item });
+    } catch (err) {
+      res.json(`Erro: ${err}`);
     }
   }
 
   async excluir(req, res) {
-    const id = req.params.id
+    const id = req.params.id;
 
     try {
-      await Cardapio.destroy({where: { id }})
-      res.redirect('/cardapio')
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      await Cardapio.destroy({ where: { id } });
+      res.json("S");
+    } catch (err) {
+      res.json(`Erro: ${err}`);
     }
   }
 
   async alterar(req, res) {
-    const id = req.params.id
-    const item = req.body
+    const id = req.params.id;
+    const item = req.body.item;
 
     try {
-      await Cardapio.update(item, {where: { id }})
-      res.redirect('/cardapio')
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      await Cardapio.update(item, { where: { id } });
+      res.json("S");
+    } catch (err) {
+      res.status(500).end(`Error: ${err}`);
     }
   }
 }
 
-module.exports = CardapioController
+module.exports = CardapioController;
