@@ -1,77 +1,64 @@
-const util = require('util')
-const {Feed} = require('../models')
+const util = require("util");
+const { Feed } = require("../models");
 
 class FeedController {
   constructor(app) {
-    this._app = app
+    this._app = app;
   }
 
   async listar(req, res) {
     try {
-      const posts = await Feed.findAll()
-      res.render('feed/listar', {posts: posts})
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      const posts = await Feed.findAll();
+      res.json(posts);
+    } catch (err) {
+      res.status(500).end(`Error: ${err}`);
     }
-  }
-
-  async novo(req, res) {
-    const posts = {}
-    res.render("feed/adicionar", {posts})
   }
 
   async adicionar(req, res) {
-    const posts = req.body
-    
-    req.assert("titulo", "Título é obrigatório").notEmpty()
-
-    const erros = req.validationErrors()
-
-    if (erros) {
-      return res.render("feed/adicionar", {erros, posts})
-    }
+    const post = req.body.post;
 
     try {
-      await Feed.create(posts)
-      res.redirect("/feed")
-    } catch(err) {
-      await res.render("form", {status: err}, posts)
+      await Feed.create(post);
+      res.json("S");
+    } catch (err) {
+      res.json("Erro");
     }
   }
 
   async info(req, res) {
-    const id = req.params.id
+    const id = req.params.id;
 
     try {
-      const posts = await Feed.findByPk(id)
-      res.render('feed/visualizar', {posts})
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      const post = await Feed.findByPk(id);
+      res.json({ post });
+    } catch (err) {
+      res.json(`Erro`);
     }
   }
 
   async excluir(req, res) {
-    const id = req.params.id
+    const id = req.params.id;
 
     try {
-      await Feed.destroy({where: { id }})
-      res.redirect('/feed')
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      await Feed.destroy({ where: { id } });
+      res.json("S");
+    } catch (err) {
+      res.json(`Erro`)
     }
   }
 
   async alterar(req, res) {
-    const id = req.params.id
-    const posts = req.body
+    const id = req.params.id;
+    const posts = req.body.post;
 
     try {
-      await Feed.update(posts, {where: { id }})
-      res.redirect('/feed')
-    } catch(err) {
-      res.status(500).end(`Error: ${err}`)
+      await Feed.update(posts, { where: { id } });
+      res.json("S");
+    } catch (err) {
+      res.json(`Error`);
     }
   }
 }
 
-module.exports = FeedController
+module.exports = FeedController;

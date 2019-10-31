@@ -8,8 +8,6 @@ module.exports = (app) => {
 		.get(controller.listar.bind(controller))
 		.post(controller.adicionar.bind(controller))
 
-	app.get("/feed/novo", controller.novo.bind(controller))
-
 	app.get("/feed/info/:id", controller.info.bind(controller))
 
 	app.route("/feed/:id")

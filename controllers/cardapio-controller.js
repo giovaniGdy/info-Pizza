@@ -1,13 +1,12 @@
-const util = require("util");
-
 const { Cardapio } = require("../models");
+const multer = require('multer')
 
 class CardapioController {
   constructor(app) {
     this._app = app;
   }
 
-  async listar(req, res) {
+  async listar(res) {
     try {
       const items = await Cardapio.findAll();
       res.json(items);
@@ -18,7 +17,6 @@ class CardapioController {
 
   async adicionar(req, res) {
     const items = req.body.item;
-    console.log(items);
 
     try {
       await Cardapio.create(items);

@@ -49,7 +49,11 @@ class LoginController {
     const userPass = req.body.usuario.senha;
     const userName = req.body.usuario.username;
 
-    const loginConfirmation = ["ACCESS_GRANTED_USER_PERMITED", userName, userPass]
+    const loginConfirmation = [
+      "ACCESS_GRANTED_USER_PERMITED",
+      userName,
+      userPass
+    ];
 
     console.log(req.body.usuario);
 

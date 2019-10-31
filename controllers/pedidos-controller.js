@@ -54,7 +54,7 @@ class PedidosController {
     const pedido = req.body.pedido;
 
     try {
-      const alterar = await Pedido.update(pedido, { where: { id } });
+      await Pedido.update(pedido, { where: { id } });
       res.json("S");
     } catch (err) {
       res.json(`Error: ${err}`);
