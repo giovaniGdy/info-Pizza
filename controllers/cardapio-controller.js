@@ -1,12 +1,11 @@
 const { Cardapio } = require("../models");
-const multer = require('multer')
 
 class CardapioController {
   constructor(app) {
     this._app = app;
   }
 
-  async listar(res) {
+  async listar(req, res) {
     try {
       const items = await Cardapio.findAll();
       res.json(items);
@@ -16,14 +15,29 @@ class CardapioController {
   }
 
   async adicionar(req, res) {
-    const items = req.body.item;
+    const itemFoto = req.body;
+    
+    console.log(itemFoto)
 
-    try {
-      await Cardapio.create(items);
-      res.json("S");
-    } catch (err) {
-      res.json(`Erro ${err}`);
+    for (let key of itemFoto.entries()) {
+      console.log(key)
+    } 
+
+    const item = {
+      nome: itemFoto.nome,
+      preco: itemFoto.preco,
+      descricao: itemFoto.descricao,
+      imgUrl: itemFoto.imgUrl,
+      status: itemFoto.status
     }
+
+    // try {
+    //   await Cardapio.create(item);
+    //   res.json("S");
+    // } catch (err) {
+    //   res.json("Erro");
+    // }
+
   }
 
   async info(req, res) {

@@ -55,8 +55,6 @@ class LoginController {
       userPass
     ];
 
-    console.log(req.body.usuario);
-
     try {
       await User.findOne({ where: { user: userName } }).then(data => {
         if (data === null) {
