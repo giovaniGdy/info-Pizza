@@ -14,15 +14,20 @@ class CardapioController {
     }
   }
 
+  async listadosApenas(req, res) {
+    const listado = "Listado"
+
+    try {
+      const items = await Cardapio.findAll( { where: {status: listado}} );
+      res.json(items);
+    } catch (err) {
+      res.status(500).end(`Error: ${err}`);
+    }
+  }
+
   async adicionar(req, res) {
-    const itemFoto = req.body;
+    const itemFoto = req.body.sendToController;
     
-    console.log(itemFoto)
-
-    for (let key of itemFoto.entries()) {
-      console.log(key)
-    } 
-
     const item = {
       nome: itemFoto.nome,
       preco: itemFoto.preco,
@@ -31,12 +36,12 @@ class CardapioController {
       status: itemFoto.status
     }
 
-    // try {
-    //   await Cardapio.create(item);
-    //   res.json("S");
-    // } catch (err) {
-    //   res.json("Erro");
-    // }
+    try {
+       await Cardapio.create(item);
+       res.json("S");
+     } catch (err) {
+       res.json("Erro");
+    }
 
   }
 

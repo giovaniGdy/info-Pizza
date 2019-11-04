@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       endereco: DataTypes.STRING,
       cpf: DataTypes.INTEGER,
       pedido: DataTypes.STRING,
+      preco: DataTypes.DOUBLE,
       status: DataTypes.STRING
     },
     {
