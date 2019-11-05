@@ -23,7 +23,9 @@ CREATE TABLE `pedido` (
   `telefone` int(9) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `cpf` bigint(11) DEFAULT NULL,
+  `valorTotal` double DEFAULT NULL,
   `pedido` varchar(255) DEFAULT NULL,
+  `preco` double DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL,
   
   `createdAt` datetime DEFAULT NULL,
@@ -73,3 +75,5 @@ CREATE TABLE `feed` (
   
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into usuarios values (1, 'Admin', 123456, 'ADMIN', 'Não Definido', 555555555, 55555555555, 'ADMIN', "2019-10-10 00:00:00", "2019-10-10 00:00:00");

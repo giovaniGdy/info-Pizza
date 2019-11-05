@@ -5,10 +5,12 @@ module.exports = app => {
 
   app
     .route("/login")
-    .get(controller.loginScreen.bind(controller))
-    .post(controller.cadastrar.bind(controller));
+    .get(controller.userAlt.bind(controller))
+//    .post(controller.cadastrar.bind(controller));
 
-  app.get("/login/novo", controller.novo.bind(controller));
+  app.route("/userAlt").post(
+    controller.userAlt.bind(controller))
+    .put(controller.alterar.bind(controller))
 
   app
     .route("/login/:id")

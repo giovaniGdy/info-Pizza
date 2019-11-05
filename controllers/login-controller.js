@@ -6,44 +6,36 @@ class LoginController {
     this._app = app;
   }
 
-  async loginScreen(req, res) {
-    try {
-      const user = {};
-      res.render("users/login", { user });
-    } catch (err) {
-      res.status(500).end(`Error: ${err}`);
-    }
-  }
-
-  async novo(req, res) {
-    const user = {};
-    res.render("users/cadastroForm", { user });
-  }
-
-  async cadastrar(req, res) {
-    const user = req.body;
-
-    req.assert("user", "Nome de usuário é obrigatório").notEmpty();
-    req.assert("senha", "Senha é obrigatório").notEmpty();
-    req.assert("nome", "Nome é obrigatório").notEmpty();
-    req.assert("endereco", "Endereço é obrigatório").notEmpty();
-    req.assert("telefone", "Telefone é obrigatório").notEmpty();
-    req.assert("cpf", "CPF é obrigatório").notEmpty();
-    req.assert("type");
-
-    const erros = req.validationErrors();
-
-    if (erros) {
-      return res.render("users/cadastroForm", { erros, user });
-    }
+  async userAlt(req, res) {
+    const userPass = req.body.usuario.senha;
+    const userName = req.body.usuario.username;
 
     try {
-      await User.create(user);
-      res.redirect("/");
+      await User.findOne({ where: { user: userName } }).then(data => {
+        if (data === null) {
+          res.json("Invalido");
+        } else if (userName === data.user && userPass === data.senha) {
+          const userData = data
+          res.json(userData);
+        } else {
+          res.json("Invalido");
+        }
+      });
     } catch (err) {
-      await res.render("form", { status: err }, user);
+      return res.status(500).end(`Error: ${err}`);
     }
   }
+
+  // async cadastrar(req, res) {
+  //   const user = req.body;
+
+  //   try {
+  //     await User.create(user);
+  //     res.redirect("/");
+  //   } catch (err) {
+  //     await res.render("form", { status: err }, user);
+  //   }
+  // }
 
   async logar(req, res) {
     const userPass = req.body.usuario.senha;
@@ -83,14 +75,14 @@ class LoginController {
   }
 
   async alterar(req, res) {
-    const id = req.params.id;
-    const user = req.body;
+    const user = req.body.newUserData
+    const userId = req.body.newUserData.id
 
     try {
-      await User.update(user, { where: { id } });
-      res.redirect("/");
+      const r = await User.update(user, { where: { id: userId } });
+      res.json(r);
     } catch (err) {
-      res.status(500).end(`Error: ${err}`);
+      res.json(`Erro ${err}`);
     }
   }
 }

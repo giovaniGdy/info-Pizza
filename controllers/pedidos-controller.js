@@ -11,7 +11,6 @@ class PedidosController {
   async listar(req, res) {
     try {
       const pedidos = await Pedido.findAll();
-      console.log(pedidos)
       return res.json(pedidos);
     } catch (err) {
       res.status(500).end(`Error: ${err}`);
@@ -20,8 +19,6 @@ class PedidosController {
 
   async adicionar(req, res) {
     const pedido = req.body.pedido;
-
-    console.log(req.body.pedido)
 
     try {
       const resp = await Pedido.create(pedido);
