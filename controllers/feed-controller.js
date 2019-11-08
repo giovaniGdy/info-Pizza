@@ -8,7 +8,7 @@ class FeedController {
 
   async listar(req, res) {
     try {
-      const posts = await Feed.findAll();
+      const posts = await Feed.findAll({ order: [["id", "DESC"]] });
       res.json(posts);
     } catch (err) {
       res.status(500).end(`Error: ${err}`);
@@ -44,7 +44,7 @@ class FeedController {
       await Feed.destroy({ where: { id } });
       res.json("S");
     } catch (err) {
-      res.json(`Erro`)
+      res.json(`Erro`);
     }
   }
 

@@ -14,4 +14,8 @@ module.exports = app => {
     .route("/pedidos/:id")
     .delete(controller.excluir.bind(controller))
     .put(controller.alterar.bind(controller));
+
+  app
+   .route("/dadosPedido")
+   .put(controller.dadosPedido.bind(controller));
 };

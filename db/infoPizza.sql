@@ -23,7 +23,6 @@ CREATE TABLE `pedido` (
   `telefone` int(9) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `cpf` bigint(11) DEFAULT NULL,
-  `valorTotal` double DEFAULT NULL,
   `pedido` varchar(255) DEFAULT NULL,
   `preco` double DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL,

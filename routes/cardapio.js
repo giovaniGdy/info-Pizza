@@ -16,12 +16,13 @@ const upload = multer({ storage: storage }).single("image");
 module.exports = app => {
   const controller = new CardapioController(app);
 
-  app.use(require("body-parser").json());
-
   app
     .route("/cardapio")
     .get(controller.listar.bind(controller))
     .post(controller.adicionar.bind(controller));
+
+    
+	app.get("/cardapio/info/:id", controller.info.bind(controller))
 
   app.post("/cardapio-img", function(req, res) {
     upload(req, res, function(err) {
@@ -33,14 +34,16 @@ module.exports = app => {
         status: req.body.status
       };
 
-      axios.post("http://localhost:8081/cardapio", { sendToController });
+      axios.post("http://localhost:8081/cardapio", { sendToController })
     });
-  });
+  })
 
   app
     .route("/cardapio/:id")
     .delete(controller.excluir.bind(controller))
     .put(controller.alterar.bind(controller));
 
-  app.route("/cardapio-listados").get(controller.listadosApenas.bind(controller));
+  app
+    .route("/cardapio-listados")
+    .get(controller.listadosApenas.bind(controller));
 };

@@ -10,7 +10,7 @@ class PedidosController {
 
   async listar(req, res) {
     try {
-      const pedidos = await Pedido.findAll();
+      const pedidos = await Pedido.findAll({ order: [["id", "DESC"]] });
       return res.json(pedidos);
     } catch (err) {
       res.status(500).end(`Error: ${err}`);
@@ -46,6 +46,17 @@ class PedidosController {
       await Pedido.destroy({ where: { id } }).then(res.json("S"));
     } catch (err) {
       res.json("Erro");
+    }
+  }
+
+  async dadosPedido(req, res) {
+    const id = req.body.id
+
+    try {
+      const pedido = await Pedido.findByPk(id);
+      res.json({ pedido });
+    } catch (err) {
+      res.json(`Erro: ${err}`);
     }
   }
 

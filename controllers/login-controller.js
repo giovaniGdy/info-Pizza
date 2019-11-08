@@ -11,12 +11,11 @@ class LoginController {
     const userName = req.body.usuario.username;
 
     try {
-      await User.findOne({ where: { user: userName } }).then(data => {
-        if (data === null) {
+      await User.findOne({ where: { user: userName } }).then(res => {
+        if (res === null) {
           res.json("Invalido");
-        } else if (userName === data.user && userPass === data.senha) {
-          const userData = data
-          res.json(userData);
+        } else if (userName === res.user && userPass === res.senha) {
+          res.json(res);
         } else {
           res.json("Invalido");
         }
@@ -75,14 +74,14 @@ class LoginController {
   }
 
   async alterar(req, res) {
-    const user = req.body.newUserData
-    const userId = req.body.newUserData.id
+    const user = req.body.newUserData;
+    const userId = req.body.newUserData.id;
 
     try {
-      const r = await User.update(user, { where: { id: userId } });
-      res.json(r);
+      await User.update(user, { where: { id: userId } });
+      res.json("S");
     } catch (err) {
-      res.json(`Erro ${err}`);
+      res.json(`Erro`);
     }
   }
 }
