@@ -26,13 +26,13 @@ class CardapioController {
   }
 
   async adicionar(req, res) {
-    const itemFoto = req.body.sendToController;
-    
+    const itemFoto = req.body;
+        
     const item = {
       nome: itemFoto.nome,
       preco: itemFoto.preco,
       descricao: itemFoto.descricao,
-      imgUrl: itemFoto.imgUrl,
+      imgUrl: req.file.originalname,
       status: itemFoto.status
     }
 

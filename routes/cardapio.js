@@ -19,24 +19,9 @@ module.exports = app => {
   app
     .route("/cardapio")
     .get(controller.listar.bind(controller))
-    .post(controller.adicionar.bind(controller));
+    .post(upload, controller.adicionar.bind(controller));
 
-    
-	app.get("/cardapio/info/:id", controller.info.bind(controller))
-
-  app.post("/cardapio-img", function(req, res) {
-    upload(req, res, function(err) {
-      const sendToController = {
-        nome: req.body.nome,
-        preco: req.body.preco,
-        descricao: req.body.descricao,
-        imgUrl: req.file.filename,
-        status: req.body.status
-      };
-
-      axios.post("http://localhost:8081/cardapio", { sendToController })
-    });
-  })
+  app.get("/cardapio/info/:id", controller.info.bind(controller));
 
   app
     .route("/cardapio/:id")
