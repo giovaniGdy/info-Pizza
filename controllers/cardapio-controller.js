@@ -38,7 +38,7 @@ class CardapioController {
 
     try {
       await Cardapio.create(item);
-      res.json("S");
+      res.json("S testing");
     } catch (err) {
       res.json("Erro");
     }
