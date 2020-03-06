@@ -15,10 +15,10 @@ class CardapioController {
   }
 
   async listadosApenas(req, res) {
-    const listado = "Listado"
+    const listado = "Listado";
 
     try {
-      const items = await Cardapio.findAll( { where: {status: listado}} );
+      const items = await Cardapio.findAll({ where: { status: listado } });
       res.json(items);
     } catch (err) {
       res.status(500).end(`Error: ${err}`);
@@ -27,22 +27,21 @@ class CardapioController {
 
   async adicionar(req, res) {
     const itemFoto = req.body;
-        
+
     const item = {
       nome: itemFoto.nome,
       preco: itemFoto.preco,
       descricao: itemFoto.descricao,
       imgUrl: req.file.originalname,
       status: itemFoto.status
-    }
+    };
 
     try {
-       await Cardapio.create(item);
-       res.json("S");
-     } catch (err) {
-       res.json("Erro");
+      await Cardapio.create(item);
+      res.json("S");
+    } catch (err) {
+      res.json("Erro");
     }
-
   }
 
   async info(req, res) {
